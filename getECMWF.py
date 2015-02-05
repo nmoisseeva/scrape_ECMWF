@@ -2,7 +2,8 @@
 # getECMWF.py 
 #===================
 """
-The script gets ECMWF xml data for the supplied locations and converts to it csv format.
+***meta***
+The script gets ECMWF xml data for the supplied locations and converts it to csv format.
 
 Current supplied locations:
 Bear_Mnt       55.6986 -120.4306 
@@ -45,7 +46,7 @@ var_names = ['temperature', 'windDirection','windSpeed','humidity','pressure','c
 			'fog','lowClouds','mediumClouds', 'highClouds','dewpointTemperature']
 var_attr = ['value','deg','mps','value','value','percent','percent','percent','percent','percent','value']
 
-#make a list of units for above vars
+#make a list of units for above vars (see meta above)
 var_units = ['(c)','(deg)','(mps)','(pcnt)','(hPa)','(pcnt)','(pcnt)','(pcnt)','(pcnt)','(pcnt)','(c)']
 
 data_dir = '/Users/nmoisseeva/data/ECMWF/'
