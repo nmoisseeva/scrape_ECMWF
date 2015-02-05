@@ -49,6 +49,7 @@ var_attr = ['value','deg','mps','value','value','percent','percent','percent','p
 #make a list of units for above vars (see meta above)
 var_units = ['(c)','(deg)','(mps)','(pcnt)','(hPa)','(pcnt)','(pcnt)','(pcnt)','(pcnt)','(pcnt)','(c)']
 
+#directory for saving data
 data_dir = '/Users/nmoisseeva/data/ECMWF/'
 
 #-------------end of input-----------------------
@@ -70,13 +71,6 @@ if len(stations) != len(lat) or len(stations) !=  len(lon):
 #test that the number of variables matches number of attributes and units
 if len(var_names) != len(var_attr) or len(var_names) != len(var_units):
 	sys.exit('Please ensure that var_names, var_attr and var_units are the same length')
-
-# #create storage folders for data (if they don't yet exist)
-# for nStn, stn in enumerate(stations):
-# 	stn_path = data_dir + stn + '/'
-# 	if not os.path.exists(stn_path):
-# 		print('Creating storage directory: ' + stn_path)
-# 		os.makedirs(stn_path)
 
 
 #loop through all supplied stations to get xml data
