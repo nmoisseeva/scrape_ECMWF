@@ -1,0 +1,4 @@
+  File "./getECMWF.py", line 29
+    cfg_file = '/nfs/crypt/arena/users/model/setup/wpVerif2.cfg'
+    ^
+IndentationError: unexpected indent

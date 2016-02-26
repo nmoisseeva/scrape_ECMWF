@@ -25,9 +25,8 @@ Sample raw data from XML file:
 
 #-----------------INPUT--------------------------
 
-# cfg_file = '/nfs/crypt/arena/users/model/setup/wpVerif2.cfg'
-cfg_file = './wpVerif2.cfg'
-
+#config directory
+cfg_file = '/nfs/crypt/arena/users/model/setup/wpVerif2.cfg'
 
 #choose which vars and attributes to import (see sample list above). MUST BE THE SAME LENGTH
 var_names = ['windSpeed']
@@ -104,8 +103,7 @@ for nStn, stn in enumerate(stations):
 			get_var = fcst.find(child_call)										#get instance of variable
 			if get_var is not None:												#check that record exists
 				data_row.extend([get_var.attrib[var_attr[nVar]]])				#append row with new daata
-		data_row = [fcst.attrib['from']] + data_row								#add time step at the beginning of the row
-		print data_row
+		data_row = [fcst.attrib['from']] + data_row								#add time step at the beginning of the row	
 		if len(data_row) == len(var_names) + 1: 								#check that no data is missing
 			csvwrite.writerows([data_row])										#if all data is present write wrote to csv
 			rec_cnt = rec_cnt + 1 													#add counter
