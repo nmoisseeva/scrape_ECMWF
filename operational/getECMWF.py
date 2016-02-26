@@ -64,7 +64,6 @@ if len(stations) != len(lat) or len(stations) !=  len(lon):
 if len(var_names) != len(var_attr) or len(var_names) != len(var_units):
 	sys.exit('Please ensure that var_names, var_attr and var_units are the same length')
 
-
 #loop through all supplied stations to get xml data
 for nStn, stn in enumerate(stations):
 	url = 'http://api.yr.no/weatherapi/locationforecast/1.9/?lat=' + str(lat[nStn]) + ';lon=' + str(lon[nStn]) + ';'
@@ -135,7 +134,7 @@ for nStn, stn in enumerate(stations):
 
 
 #save csv file in appropriate directory
-save_path = data_dir + run_dt.strftime('%y%m%d%H')  + '/ASCII/m/g3/WND_HUB.t.1'
+save_path = data_dir + run_dt.strftime('%y%m%d%H')  + '/ASCII/m/g3/WND_HUB.1.t'
 row_format = ['%d'] + (['%f' for i in range(len(stations))])
 np.savetxt(save_path,WND_HUB,fmt=row_format, delimiter=' ')
 print('Saved wind hub file to directory %s ' %save_path)
