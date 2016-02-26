@@ -139,6 +139,8 @@ row_format = ['%d'] + (['%f' for i in range(len(stations))])
 np.savetxt(save_path,WND_HUB,fmt=row_format, delimiter=' ')
 print('Saved wind hub file to directory %s ' %save_path)
 
+os.mknod(data_dir + run_dt.strftime('%y%m%d%H')  + '/ASCII/m/g3/WND_HUB.1.t.OK')
+
 print('======================COMPLETE========================')
 
 
