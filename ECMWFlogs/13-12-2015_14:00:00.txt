@@ -1,0 +1,37 @@
+XML donwload complete for Bear_Mnt station. 2015-12-13 14:00:11.150049
+XML donwload complete for Dokie station. 2015-12-13 14:00:11.903395
+XML donwload complete for Quality_Wind station. 2015-12-13 14:00:12.677191
+XML donwload complete for Quality_Wind2 station. 2015-12-13 14:00:13.552573
+XML donwload complete for Cape_Scott station. 2015-12-13 14:00:14.876506
+Converting XML files to CSV -------->
+...converting Bear_Mnt.xml
+Model run start time: 2015-12-13T12:00:00Z
+Total number of precipitation records found: 70
+Moving file precip2015-12-13_1200_Bear_Mnt.csv to directory /Users/nadya2/data/ECMWF/Bear_Mnt/2015/12/precip2015-12-13_1200_Bear_Mnt.csv
+Total number of records stored for each variable: 119
+Moving file 2015-12-13_1200_Bear_Mnt.csv to directory /Users/nadya2/data/ECMWF/Bear_Mnt/2015/12/2015-12-13_1200_Bear_Mnt.csv 
+...converting Dokie.xml
+Model run start time: 2015-12-13T12:00:00Z
+Total number of precipitation records found: 70
+Moving file precip2015-12-13_1200_Dokie.csv to directory /Users/nadya2/data/ECMWF/Dokie/2015/12/precip2015-12-13_1200_Dokie.csv
+Total number of records stored for each variable: 119
+Moving file 2015-12-13_1200_Dokie.csv to directory /Users/nadya2/data/ECMWF/Dokie/2015/12/2015-12-13_1200_Dokie.csv 
+...converting Quality_Wind.xml
+Model run start time: 2015-12-13T12:00:00Z
+Total number of precipitation records found: 70
+Moving file precip2015-12-13_1200_Quality_Wind.csv to directory /Users/nadya2/data/ECMWF/Quality_Wind/2015/12/precip2015-12-13_1200_Quality_Wind.csv
+Total number of records stored for each variable: 119
+Moving file 2015-12-13_1200_Quality_Wind.csv to directory /Users/nadya2/data/ECMWF/Quality_Wind/2015/12/2015-12-13_1200_Quality_Wind.csv 
+...converting Quality_Wind2.xml
+Model run start time: 2015-12-13T12:00:00Z
+Total number of precipitation records found: 70
+Moving file precip2015-12-13_1200_Quality_Wind2.csv to directory /Users/nadya2/data/ECMWF/Quality_Wind2/2015/12/precip2015-12-13_1200_Quality_Wind2.csv
+Total number of records stored for each variable: 119
+Moving file 2015-12-13_1200_Quality_Wind2.csv to directory /Users/nadya2/data/ECMWF/Quality_Wind2/2015/12/2015-12-13_1200_Quality_Wind2.csv 
+...converting Cape_Scott.xml
+Model run start time: 2015-12-13T12:00:00Z
+Total number of precipitation records found: 70
+Moving file precip2015-12-13_1200_Cape_Scott.csv to directory /Users/nadya2/data/ECMWF/Cape_Scott/2015/12/precip2015-12-13_1200_Cape_Scott.csv
+Total number of records stored for each variable: 119
+Moving file 2015-12-13_1200_Cape_Scott.csv to directory /Users/nadya2/data/ECMWF/Cape_Scott/2015/12/2015-12-13_1200_Cape_Scott.csv 
+======================COMPLETE========================

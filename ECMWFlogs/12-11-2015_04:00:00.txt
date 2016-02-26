@@ -1,0 +1,18 @@
+XML donwload complete for Bear_Mnt station. 2015-11-12 04:00:03.353516
+XML donwload complete for Dokie station. 2015-11-12 04:00:04.131930
+Traceback (most recent call last):
+  File "/Users/nadya2/code/getECMWF.py", line 79, in <module>
+    load = urllib2.urlopen(url)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 154, in urlopen
+    return opener.open(url, data, timeout)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 437, in open
+    response = meth(req, response)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 550, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 475, in error
+    return self._call_chain(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 409, in _call_chain
+    result = func(*args)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib2.py", line 558, in http_error_default
+    raise HTTPError(req.get_full_url(), code, msg, hdrs, fp)
+urllib2.HTTPError: HTTP Error 503: Service Unavailable

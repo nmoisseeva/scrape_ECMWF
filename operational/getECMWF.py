@@ -25,15 +25,16 @@ Sample raw data from XML file:
 
 #-----------------INPUT--------------------------
 
-cfg_file = '/nfs/crypt/arena/users/model/setup/wpVerif2.cfg'
+# cfg_file = '/nfs/crypt/arena/users/model/setup/wpVerif2.cfg'
+cfg_file = './wpVerif2.cfg'
+
 
 #choose which vars and attributes to import (see sample list above). MUST BE THE SAME LENGTH
-var_names = ['temperature', 'windDirection','windSpeed','humidity','pressure','cloudiness',\
-			'fog','lowClouds','mediumClouds', 'highClouds','dewpointTemperature']
-var_attr = ['value','deg','mps','value','value','percent','percent','percent','percent','percent','value']
+var_names = ['windSpeed']
+var_attr = ['mps']
 
 #make a list of units for above vars (see meta above)
-var_units = ['(c)','(deg)','(mps)','(pcnt)','(hPa)','(pcnt)','(pcnt)','(pcnt)','(pcnt)','(pcnt)','(c)']
+var_units = ['(mps)']
 
 #directory for saving data
 data_dir = '/nfs/neltharion/www/results/ECMWF/'
@@ -69,7 +70,7 @@ for nStn, stn in enumerate(stations):
 	url = 'http://api.yr.no/weatherapi/locationforecast/1.9/?lat=' + str(lat[nStn]) + ';lon=' + str(lon[nStn]) + ';'
 	load = urllib2.urlopen(url)
 	contents = load.read()
-	xmlfile = './run'+ stn + '.xml'
+	xmlfile = './run/'+ stn + '.xml'
 	file = open(xmlfile, 'w')
 	file.write(contents)
 	file.close()
@@ -80,7 +81,7 @@ for nStn, stn in enumerate(stations):
 #loop through all supplied stations to convert xml to csv
 print('Converting XML files to CSV -------->')
 for nStn, stn in enumerate(stations):
-	xmlfile = stn + '.xml'
+	xmlfile = './run/'+ stn + '.xml'
 	print("...converting " + xmlfile)
 	tree = etree.parse(xmlfile)													#get xml tree structure
 	meta = tree.find('.//model')												#find metadata
@@ -105,9 +106,11 @@ for nStn, stn in enumerate(stations):
 			if get_var is not None:												#check that record exists
 				data_row.extend([get_var.attrib[var_attr[nVar]]])				#append row with new daata
 		data_row = [fcst.attrib['from']] + data_row								#add time step at the beginning of the row
-		rec_cnt = rec_cnt + 1 													#add counter
+		print data_row
 		if len(data_row) == len(var_names) + 1: 								#check that no data is missing
 			csvwrite.writerows([data_row])										#if all data is present write wrote to csv
+			rec_cnt = rec_cnt + 1 													#add counter
+
 	csvopen.close()																#close csv
 	print("Total number of records stored for each variable: " + str(rec_cnt))
 
@@ -116,23 +119,26 @@ for nStn, stn in enumerate(stations):
 	os.renames(csvname, save_path)
 	print('Saving individual station file %s to directory %s ' %(csvname, save_path))
 
-#construct a Wind Hub file from existing station files
-WND_HUB = np.empty((rec_cnt,len(stations))) * np.nan
+#construct a Wind Hub file from existing station files 							#create storage array for all stations
+WND_HUB = np.empty((rec_cnt,len(stations)+1)) * np.nan
 for nStn, stn in enumerate(stations):
-	stnfile = './run/'+ run_timestamp + '_' + stn + '.csv'
+	stnfile = './run/'+ run_timestamp + '_' + stn + '.csv' 						#generate filename
 	#if on first stsation - extract forecast horizon
 	if nStn==0:
-		fcsthr = np.genfromtxt(stnfile,usecols=0,dtype=str)
-		if len(fcsthr)!=rec_cnt:
-			print('WARNING: mismatch in number of records between stations. Requires manual verification!!!')
-		offset = [datetime.datetime.strptime(fcsthr[i], '%Y-%m-%dT%H:%M:%SZ').hour - run_dt.hour for i in range(rec_cnt)]
+		fcsthr = np.genfromtxt(stnfile,usecols=0,dtype=str,skip_header=1,delimiter=',') 	#for first run record forecast horizons
+		if len(fcsthr)!=(rec_cnt):
+			print('WARNING: mismatch in number of records between stations. Requires manual verification!!!') #check that all files are the same
+		delt = [datetime.datetime.strptime(fcsthr[i], '%Y-%m-%dT%H:%M:%SZ') - run_dt for i in range(rec_cnt)] #calculate time offset
+		offset = [int(delt[i].days * 24. + delt[i].seconds /3600.) for i in range(rec_cnt)] 					#convert to hours
+		WND_HUB[:,0] = offset 													#store offset
+	WND_HUB[:,nStn+1] = np.genfromtxt(stnfile,usecols=1,skip_header=1,delimiter=',') 		#store wind data for all stations
 
 
 #save csv file in appropriate directory
-save_path = data_dir + run_dt.strftime('%y%m%d%H')  + '/ASCII/m/g3/'
-print save_path
-os.renames(csvname, save_path)
-print('Moving file %s to directory %s ' %(csvname, save_path))
+save_path = data_dir + run_dt.strftime('%y%m%d%H')  + '/ASCII/m/g3/WND_HUB.t.1'
+row_format = ['%d'] + (['%f' for i in range(len(stations))])
+np.savetxt(save_path,WND_HUB,fmt=row_format, delimiter=' ')
+print('Saved wind hub file to directory %s ' %save_path)
 
 print('======================COMPLETE========================')
 
